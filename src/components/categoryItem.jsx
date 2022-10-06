@@ -1,5 +1,9 @@
 import styled from 'styled-components';
 import { mobile } from "../responsive";
+import {useDispatch} from "react-redux";
+import { getCate } from '../features/products/productSlice';
+import axios from "axios";
+
 
 const Container = styled.div`
   flex:1;  
@@ -39,13 +43,30 @@ const Button = styled.button`
     cursor:pointer;
     font-weight:600;
 `
+const handleClick= async(item) =>{
+    try{
+        const res = await axios(`https://fakestoreapi.com/products/${item}`);
+        return res.data
+         }catch(err){
+    
+};
+}
 const CategoryItem = ({item}) => {
+    const dispatch = useDispatch();
+    const data = handleClick();
+
     return ( 
-        <Container>
+        <Container >
+            
             <Image src={item.img}/>
             <Info>
                 <Title>{item.title}</Title>
-                <Button>SHOP NOW</Button>
+                <Button
+                onClick={()=>
+                 dispatch(getCate(data))
+                 }>
+                    SHOP NOW</Button>
+           
             </Info>
         </Container>
      );

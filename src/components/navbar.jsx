@@ -1,8 +1,10 @@
 import styled from 'styled-components';
+import { Link,NavLink } from "react-router-dom";
 import SearchIcon from '@material-ui/icons/Search';
 import Badge from '@material-ui/core/Badge';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { mobile } from "../responsive";
+import { PowerOffOutlined } from '@material-ui/icons';
 
 const NavBar = () => {
 
@@ -46,7 +48,8 @@ ${mobile({ display: "none"})}
 const Center = styled.div`
 flex:1;
 text-align:center;
-`;
+${mobile({marginLeft:"20px"})}`
+
 
 const Logo = styled.h1`
 font-weight:700;
@@ -57,16 +60,25 @@ flex:1;
 display:flex;
 align-items:center;
 justify-content:flex-end;
-${mobile({ flex:2,justifyContent: "center"})}
+${mobile({ justifyContent: "center"})}
 `
 const MenuItem = styled.div`
+text-decoration:none ;
 font-size:14px;
 cursor:pointer;
 margin-left:25px;
-${mobile({ fontSize: "12px", marginLeft:"10px"})}
+${mobile({ fontSize: "12px", marginLeft:"10px"})}`
+
+const MenuContainer = styled.div`
+display: block;
+${mobile({ display:"none"})}`
+
+const IconContainer = styled.div`
+display:none;
+${mobile({ display:"flex",marginLeft:"30px"})}
 `
 
-    return ( 
+return ( 
         <Container>
             <Wrapper>
             <Left>
@@ -76,10 +88,24 @@ ${mobile({ fontSize: "12px", marginLeft:"10px"})}
                      <SearchIcon style={{color:"gray", fontSize:16}}/>
                 </SearchContainer>
             </Left>
-            <Center><Logo>wearFINA.</Logo></Center>
+            <Center><Logo><Link  className="navLink" to="/">wearFINA.</Link></Logo></Center>
             <Right>
-             <MenuItem>REGISTER</MenuItem>
-             <MenuItem>SIGN IN</MenuItem>
+             <MenuContainer>
+             <MenuItem>
+             <NavLink className="navLink" to="/register">REGISTER</NavLink>
+             </MenuItem>
+             </MenuContainer>
+             <MenuContainer>
+             <MenuItem>
+             <NavLink to="/login" className="navLink">SIGN IN</NavLink>
+             </MenuItem>
+             </MenuContainer>
+             <IconContainer>
+             <MenuItem>
+             <NavLink to="/login" className="navLink"><PowerOffOutlined/></NavLink>
+             </MenuItem>
+             </IconContainer>
+             
              <MenuItem>
              <Badge badgeContent={4} 
              color="primary">

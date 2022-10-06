@@ -15,7 +15,7 @@ const Title = styled.h1`
     font-size:70px;
     margin-bottom:20px;
     text-transform: uppercase;
-    ${mobile({ fontSize:"50px"})}
+    ${mobile({ fontSize:"40px"})}
 `
 const Desc = styled.div`
     font-size:24px;
@@ -23,7 +23,7 @@ const Desc = styled.div`
     margin-bottom: 20px;
     text-transform: capitalize;
     ${mobile({ textAlign:"center",
-     fontSize:"20px",
+     fontSize:"18px",
      padding:"0 45px"})}
 `
 const InputContainer = styled.div`

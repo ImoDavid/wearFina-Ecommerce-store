@@ -1,82 +1,70 @@
-import { SearchOutlined, ShoppingCartOutlined, } from "@material-ui/icons";
+import { mobile } from "../responsive";
 import styled from "styled-components";
-
-const Info = styled.div`
-    opacity:0;
-    width:100%;
-    height:100%;
-    position:absolute;
-    top:0;
-    left:0;
-    z-index:3;
-    display: flex;
-    align-items:center;
-    justify-content:center;
-    background-color: regb(0,0,0,0.2);
-    transition:all 0.5s ease;
-    `;
+import { Link } from "react-router-dom";
+import truncateText from "../utils/truncateText";
 
 const Container = styled.div`
-flex:1;
-margin:5px;
-min-width:280px;
-height:350px;
-display:flex;
-align-items:center;
-justify-content:center;
-background-color:#f5fbfb;
-position:relative;
-
-&:hover ${Info}{
-    opacity:1
-}
+  flex: 1;
+  margin: 5px;
+  min-width: 350px;
+  height: 200px;
+  display: flex;
+  background-color: #fff;
+  transition: all 0.2s;
+  &:hover {
+    transform: scale(1.01);
+  }
+  ${mobile({
+    height: "250px",
+    minWidth: "150px",
+  })}
 `;
-const Circle = styled.div`
-    width:200px;
-    height:200px;
-    border-radius:50%;
-    background-color:#fff;
-    position:absolute;
-    `;
+const Wrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${mobile({ flexDirection: "column", margin: "0 auto" })}
+`;
+
 const Image = styled.img`
-    height:75%;
-    z-index:2;
-    `;
-const Icon = styled.div`
-     width:40px;
-     height:40px;
-     border-radius:50%;
-     background-color:#fff;
-     display: flex;
-     align-items:center;
-     justify-content:center;
-     margin:10px;
-     cursor:pointer;
-     transition:all 0.5s ease;
-     
-     &:hover{
-        transform:scale(1.1);
-    }
+  height: 60%;
+  padding: 5px;
+  ${mobile({ height: "40%", marginBottom: "5px" })}
+`;
+const Info = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0px 20px;
+  ${mobile({ margin: "20px" })}
 `;
 
-const Product = ({item}) => {
-    return ( 
-        <Container>
-            <Circle/>
-            <Image src={item.img}/>
-            <Info>
-                <Icon>
-                    <ShoppingCartOutlined/>
-                </Icon>
-                <Icon>
-                    <SearchOutlined/>
-                </Icon>
-                <Icon>
-                    <ShoppingCartOutlined/>
-                </Icon>
-            </Info>
-        </Container>
-     );
-}
- 
+const Title = styled.h4`
+  margin-bottom: 30px;
+  font-weight: 300;
+  font-size: 18px;
+  text-transform: capitalize;
+  ${mobile({ marginBottom: "10px", fontSize: "16px" })}
+`;
+const Price = styled.h1`
+  font-size: 16px;
+`;
+
+
+const Product = ({ item }) => {
+  return (
+    <Container>   
+      <Wrapper>
+        <Image src={item.image} />
+        <Info>
+        <Link className="navLink" to={`/product/${item.id}`}>
+          <Title>{truncateText(item.title, 20)}</Title>
+          <Price>${item.price}</Price>
+          </Link>
+        </Info>
+      </Wrapper>
+        
+    </Container>
+  );
+};
+
 export default Product;

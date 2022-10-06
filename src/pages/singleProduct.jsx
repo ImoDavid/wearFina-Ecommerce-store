@@ -5,6 +5,8 @@ import Footer from "../components/footer";
 import NavBar from "../components/navbar";
 import Newsletter from "../components/newsletter";
 import { mobile } from "../responsive";
+import { useParams } from 'react-router-dom';
+import { useSelector } from "react-redux";
 
 
 const Container = styled.div``;
@@ -19,7 +21,7 @@ const ImgContainer = styled.div`
 const Image = styled.img`
     width:100%; 
     height:90vh;
-    object-fit:cover;
+    object-fit:contain;
     ${mobile({ height:"40vh"})}
 `;
 const InfoContainer = styled.div`
@@ -100,22 +102,24 @@ const Button = styled.button`
     }
 `;
 
-const Product = () => {
+const SingleProduct = () => {
+    const {products} = useSelector((state) => state.products);
+
+    const params = useParams();
+    const Id = params.id - 1;
+
   return (
     <Container>
       <Announcement />
       <NavBar />
       <Wrapper>
         <ImgContainer>
-          <Image src="https://placehold.jp/3d4070/ffffff/150x150.png" />
+          <Image src={products[Id].image}/>
         </ImgContainer>
         <InfoContainer>
-          <Title>Denim Jumpsuit</Title>
-          <Desc>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Eaque
-            quisquam autem libero ipsum minima iste.
-          </Desc>
-          <Price>$20</Price>
+          <Title>{products[Id].title}</Title>
+          <Desc>{products[Id].description}</Desc>
+          <Price>${products[Id].price}</Price>
           <FilterContainer>
                 <Filter>
                     <FilterTitle>Color</FilterTitle>
@@ -151,4 +155,4 @@ const Product = () => {
   );
 };
 
-export default Product;
+export default SingleProduct;
