@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {useSelector} from "react-redux";
 import { Link,NavLink } from "react-router-dom";
 import SearchIcon from '@material-ui/icons/Search';
 import Badge from '@material-ui/core/Badge';
@@ -6,7 +7,6 @@ import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { mobile } from "../responsive";
 import { PowerOffOutlined } from '@material-ui/icons';
 
-const NavBar = () => {
 
 const Container = styled.div`
 height:60px;
@@ -56,6 +56,7 @@ font-weight:700;
 ${mobile({ fontSize: "24px"})}
 `
 const Right = styled.div`
+position:relative;
 flex:1;
 display:flex;
 align-items:center;
@@ -78,8 +79,12 @@ display:none;
 ${mobile({ display:"flex",marginLeft:"30px"})}
 `
 
+const NavBar = () => {
+const {amount}  = useSelector((state) => state.cart);
+
+
 return ( 
-        <Container>
+    <Container>
             <Wrapper>
             <Left>
                 <Language>EN</Language>
@@ -107,9 +112,9 @@ return (
              </IconContainer>
              
              <MenuItem>
-             <Badge badgeContent={4} 
+             <Badge badgeContent={amount} 
              color="primary">
-            <ShoppingCartOutlinedIcon/>
+            <NavLink to="/cart" className="navLink"><ShoppingCartOutlinedIcon/></NavLink>
             </Badge>
              </MenuItem>
             </Right>

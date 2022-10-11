@@ -1,29 +1,45 @@
-import { Add, Remove } from "@material-ui/icons";
 import styled from "styled-components";
 import Announcement from "../components/announcement";
+import CartItem from "../components/cartItem";
 import NavBar from "../components/navbar";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { ArrowBackOutlined } from "@material-ui/icons";
 
 
 const Container = styled.div``;
 const Wrapper = styled.div`
-    padding:20px;
+    // background-color: red;
+    //height:100vh;
+   background-color: #f5f2f2;
 `;
 const Title = styled.div`
-    font-weight:300;
-    text-align: center;
+    font-weight:700;
+    text-align: left;
+    padding:30px 10px;
+`;
+const Text = styled.p`
+    margin-left:5px;
 `;
 const Top = styled.div`
     display:flex;
     align-items:center;
-    justify-content: center;
+    justify-content: space-between;
+    padding:20px;
+    background-color: #fff;
 `;
-const TopButton = styled.div`
-    padding:10px;
-    font-weight:600;
+const TopButton = styled.button`
+    display:flex;
+    align-items: center;
+    width:150px;
+    padding:8px 0;
+    font-weight:300;
     cursor:pointer;
-    border:${props=>props.type === "filled" && "none"};
+    border-radius:10px;
+    border:${props=>props.type === "filled" ? "none" : "1px solid teal"};
     background-color:${props=>props.type === "filled" ? "black" : "transparent"};
-    color:${props=>props.type === "filled" ? "white" : "black"};
+    color:${props=>props.type === "filled" ? "white" : "teal"};
+    margin-bottom:30px;
 `;
 
 const TopTexts = styled.div``;
@@ -34,15 +50,18 @@ const TopText = styled.span`
 `;
 const Bottom = styled.div`
     display:flex;
-    justify-content: space-between;
+    flex-direction: column;
+    padding:30px 10px;
 `;
 const Info = styled.div`
 flex:3;
 `;
 
 const Product = styled.div`
-    display:flex;
-    justify-content:space-between;
+    display:block;
+    
+    
+ 
 `;
 const ProductDetail = styled.div`
     flex:2;
@@ -67,39 +86,40 @@ const ProductColor = styled.div`
 
 `;
 const ProductSize = styled.span``;
-const PriceDetail = styled.div`
-    flex:1;
-    display:flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-`;
-
-const ProductAmountContainer = styled.div`
-    display:flex;
-    align-items:center;
-    margin-bottom: 20px;
-`;
-const ProductAmount = styled.div`
-    font-size:24px;
-    margin: 5px;
-`;
-const ProductPrice = styled.div`
-    font-size:30px;
-    font-weight:200;
-`;
 
 const Summary = styled.div`
     flex:1;    
 `;
 
 const Cart = () => {
+    const {cartItems, amount, total} = useSelector((state) => state.cart);
+    const navigate = useNavigate()
     return (
         <Container>
             <NavBar/>
             <Announcement/>
             <Wrapper>
-                <Title>YOUR BAG</Title>
+            <Title>shopping cart</Title>
+            <Top>
+            <TopTexts>subtotoal ( {amount} items)</TopTexts>
+            <TopTexts>${total}</TopTexts>
+            </Top>
+            <Bottom>
+            <TopButton type="" onClick={()=> {navigate("/home")}}> <ArrowBackOutlined/><Text> continue shopping</Text></TopButton>
+            <Product>
+            {cartItems.map((item)=>(
+                <CartItem item = {item} key={item.id}/>
+            ))} 
+            </Product>
+            </Bottom>          
+            </Wrapper>
+
+        </Container>
+      );
+}
+ 
+export default Cart;
+{/* <Title>YOUR BAG</Title>
                 <Top>
                     <TopButton>CONTINUE SHOPPING</TopButton>
                     <TopTexts>
@@ -132,11 +152,8 @@ const Cart = () => {
                         </Product>
                     </Info>
                     <Summary>summary</Summary>
-                </Bottom>
-            </Wrapper>
+                </Bottom> */}
 
-        </Container>
-      );
-}
- 
-export default Cart;
+
+
+

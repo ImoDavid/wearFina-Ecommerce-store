@@ -3,6 +3,8 @@ import { popularproducts } from '../data';
 import { useSelector } from "react-redux";
 import Product from './product';
 import { mobile } from "../responsive";
+import { useEffect } from "react";
+
 
 
 
@@ -22,9 +24,9 @@ margin:10px 0;
 letter-spacing:4.5px;
 ${mobile({ fontSize:"20px",margin:"25px"})}
 `
+
 const Products = () => {
     const {products} = useSelector((state) => state.products);
-    
 
     return (  
         <Container>

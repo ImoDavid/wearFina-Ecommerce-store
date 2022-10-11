@@ -6,8 +6,8 @@ import NavBar from "../components/navbar";
 import Newsletter from "../components/newsletter";
 import { mobile } from "../responsive";
 import { useParams } from 'react-router-dom';
-import { useSelector } from "react-redux";
-
+import { useSelector, useDispatch } from "react-redux";
+import { addItem,increase } from "../features/cart/cartSlice"
 
 const Container = styled.div``;
 const Wrapper = styled.div`
@@ -104,22 +104,22 @@ const Button = styled.button`
 
 const SingleProduct = () => {
     const {products} = useSelector((state) => state.products);
-
+    const dispatch = useDispatch();
     const params = useParams();
     const Id = params.id - 1;
-
+    const item = {amount:1,...products[Id]};
   return (
     <Container>
       <Announcement />
       <NavBar />
       <Wrapper>
         <ImgContainer>
-          <Image src={products[Id].image}/>
+          <Image src={item.image}/>
         </ImgContainer>
         <InfoContainer>
-          <Title>{products[Id].title}</Title>
-          <Desc>{products[Id].description}</Desc>
-          <Price>${products[Id].price}</Price>
+          <Title>{item.title}</Title>
+          <Desc>{item.description}</Desc>
+          <Price>${item.price}</Price>
           <FilterContainer>
                 <Filter>
                     <FilterTitle>Color</FilterTitle>
@@ -142,10 +142,11 @@ const SingleProduct = () => {
             <AddContainer>
                 <AmountContainer>
                     <Remove/>
-                    <Amount>1</Amount>
-                    <Add/>
+                    <Amount>{item.amount}</Amount>
+                    <Add  onClick={()=>dispatch(increase(item))}/>
                 </AmountContainer>
-                <Button>ADD TO CART</Button>
+                <Button
+                onClick={()=>dispatch(addItem(item))}>ADD TO CART</Button>
             </AddContainer>
         </InfoContainer>
       </Wrapper>

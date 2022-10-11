@@ -27,26 +27,26 @@
         id:1,
         img:"https://i.ibb.co/XsdmR2c/1.png",
         title:"SHIRT STYLE",
-        cate:"woman"
+        cate:"jewelery"
     },
     {
         id:2,
         img:"https://i.ibb.co/XsdmR2c/1.png",
         title:"SHIRT STYLE",
-        cate:"woman"
+        cate:"jewelery"
     },
     {
         id:3,
         img:"https://i.ibb.co/XsdmR2c/1.png",
         title:"SHIRT STYLE",
-        cate:"woman"
+        cate:"jewelery"
         
     },
     {
         id:4,
         img:"https://i.ibb.co/XsdmR2c/1.png",
         title:"SHIRT STYLE",
-        cate:"woman"
+        cate:"jewelery"
         
     }
  ]

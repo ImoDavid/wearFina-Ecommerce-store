@@ -49,20 +49,18 @@ const Price = styled.h1`
   font-size: 16px;
 `;
 
-
 const Product = ({ item }) => {
   return (
     <Container>   
       <Wrapper>
         <Image src={item.image} />
+      <Link className="navLink" to={`/product/${item.id}`}>
         <Info>
-        <Link className="navLink" to={`/product/${item.id}`}>
           <Title>{truncateText(item.title, 20)}</Title>
           <Price>${item.price}</Price>
-          </Link>
         </Info>
+          </Link>
       </Wrapper>
-        
     </Container>
   );
 };

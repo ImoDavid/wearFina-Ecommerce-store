@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import Announcement from "../components/announcement";
 import NavBar from "../components/navbar";
-import Products from "../components/products";
+import CategoryProducts from "../components/categoryProducts";
 import Newsletter from "../components/newsletter";
 import Footer from "../components/footer";
 import { mobile } from "../responsive";
-import { useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 
 
 const Container = styled.div``;
@@ -34,13 +34,17 @@ const Select = styled.select`
 const Option = styled.option``;
 
 const ProductList = () => {
-    const location = useLocation()
-    const cate = location.pathname.split("/")[2];
+    // const location = useLocation()
+    // const cate = location.pathname.split("/")[2];
+    // console.log(cate)
+     const params = useParams();
+     const {category} = params;
+
     return (  
         <Container>
             <Announcement/>
             <NavBar/>
-            <Title>{cate}</Title>
+            <Title>{ category}</Title>
             <FilterContainer>
                 <Filter>
                     <FilterText>Filter Products:</FilterText>
@@ -74,7 +78,7 @@ const ProductList = () => {
                     </Select>
                     </Filter>
             </FilterContainer>
-            <Products category={cate}/>
+            <CategoryProducts category={category} />
             <Newsletter/>
             <Footer/>
         </Container>

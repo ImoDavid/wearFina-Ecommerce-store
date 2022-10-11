@@ -4,13 +4,13 @@ import axios from "axios";
 
 const initialState = {
     products : [],
-    curCate:"",
+    curCate:[],
     isLoading: false,
 };
 
 
  
-const url = 'https://fakestoreapi.com/products';
+const url = `https://fakestoreapi.com/products/`;
 
   export const getProducts = createAsyncThunk(
     'products/getProducts',
@@ -28,6 +28,7 @@ const url = 'https://fakestoreapi.com/products';
       }
     }
   );
+
   
 
 const productSlice = createSlice({
@@ -36,7 +37,6 @@ const productSlice = createSlice({
     reducers:{
       getCate:(state,action) => {
         const itemId = action.payload;
-        console.log(itemId)
         state.curCate = itemId;
       },
     },
