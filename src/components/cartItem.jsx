@@ -1,7 +1,7 @@
 import styled from "styled-components";
-import { Add, Remove, } from "@material-ui/icons";
-import { removeItem} from "../features/cart/cartSlice"
 import { useDispatch } from "react-redux";
+import { Add, Remove, } from "@material-ui/icons";
+import { increase,decrease,removeItem} from "../features/cart/cartSlice"
 import truncateText from "../utils/truncateText";
 
 const Container = styled.div`
@@ -97,9 +97,9 @@ const CartItem = ({ item }) => {
         </TopSection>
         <PriceDetail>
           <ProductAmountContainer>
-           <Border><Add /></Border> 
-            <Border><ProductAmount>2</ProductAmount></Border>
-            <Border><Remove /></Border>
+           <Border><Add onClick={()=>dispatch(increase(item))} /></Border> 
+            <Border><ProductAmount>{item.amount}</ProductAmount></Border>
+            <Border><Remove onClick={()=>dispatch(decrease(item))} /></Border>
           </ProductAmountContainer>
           <ProductPrice>${item.price}</ProductPrice>
         </PriceDetail>
