@@ -26,13 +26,13 @@ const Slide = styled.div`
   width: 100vw;
   height: 100vh;
   background-image: linear-gradient(
-    to right bottom,
+    to right ,
     rgb(255, 255, 255) 0%,
     rgb(255, 255, 255) 70%,
     ${(props) => props.bg}
   );
 
-  ${mobile({ height: "50vh" })}
+  ${mobile({ height: "50vh"})}
 `;
 const ImgContainer = styled.div`
   height: 100%;
