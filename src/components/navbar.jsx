@@ -1,12 +1,12 @@
 import styled from 'styled-components';
 import {useSelector, useDispatch} from "react-redux";
-import { Link,NavLink,useNavigate } from "react-router-dom";
+import { Link,NavLink } from "react-router-dom";
 import SearchIcon from '@material-ui/icons/Search';
 import Badge from '@material-ui/core/Badge';
 import ShoppingCartOutlinedIcon from '@material-ui/icons/ShoppingCartOutlined';
 import { setLoading } from '../features/cart/cartSlice';
 import { mobile } from "../responsive";
-import { PowerOffOutlined, } from '@material-ui/icons';
+import { Person, } from '@material-ui/icons';
 import CartItem from './cartItem';
 
 const Container = styled.div`
@@ -132,8 +132,7 @@ const Text = styled.p`
 `;
 
 const NavBar = () => {
-const {cartItems, amount, total, isLoading} = useSelector((state) => state.cart);
-const navigate = useNavigate();
+const {cartItems, amount, isLoading} = useSelector((state) => state.cart);
 const dispatch = useDispatch();
 return ( 
     <Container>
@@ -159,7 +158,7 @@ return (
              </MenuContainer>
              <IconContainer>
              <MenuItem>
-             <NavLink to="/login" className="navLink"><PowerOffOutlined/></NavLink>
+             <NavLink to="/login" className="navLink"><Person/></NavLink>
              </MenuItem>
              </IconContainer>
              <MenuContainer>

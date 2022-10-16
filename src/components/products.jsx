@@ -1,11 +1,7 @@
 import styled from "styled-components";
-import { popularproducts } from '../data';
 import { useSelector } from "react-redux";
 import Product from './product';
 import { mobile } from "../responsive";
-import { useEffect } from "react";
-
-
 
 
 const Container = styled.div``;

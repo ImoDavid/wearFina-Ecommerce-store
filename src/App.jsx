@@ -28,13 +28,13 @@ const App = () => {
 
   useEffect(() => {
        dispatch(getProducts());
-   });
+   },[]);
 
   return(
   <React.Fragment>
       <Routes>
       
-      {/* <Route path='/movies/:id'  element={<GetId/>}/>  */}
+      
       <Route path='/cart'  element={<Cart/>}/>
       <Route path='/home' element={<Home/>}/>
       <Route path='/login'  element={<Login/>}/>

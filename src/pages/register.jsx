@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
 
 
@@ -62,10 +63,11 @@ const Register = () => {
           <Input placeholder="password" />
           <Input placeholder="confirm password" />
           <Agreement>
-            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Assumenda,
-            placeat.
+            Don't panic, this form is just for demo purposes and your details are indeed not being read.
           </Agreement>
-          <Button>Sign Up</Button>
+          <Link className="navLink" to="/home">
+            <Button>Sign Up</Button>
+          </Link>
         </Form>
       </Wrapper>
     </Container>
