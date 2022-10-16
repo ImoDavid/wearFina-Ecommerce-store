@@ -26,7 +26,7 @@ const Categories = () => {
             <Title>categories</Title>
             <Wrapper>
             {categories.map(item=>(
-                <CategoryItem item={item}/>
+                <CategoryItem key={item.id} item={item}/>
             ))}
             </Wrapper>
         </Container>
