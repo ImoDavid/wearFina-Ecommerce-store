@@ -29,7 +29,7 @@ const Wrapper = styled.div`
 const Image = styled.img`
   height: 60%;
   padding: 5px;
-  ${mobile({ height: "40%", marginBottom: "5px" })}
+  ${mobile({ height: "30%", marginBottom: "5px" })}
 `;
 const Info = styled.div`
   display: flex;
