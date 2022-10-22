@@ -5,6 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getCate } from "../features/products/productSlice";
 import { mobile } from "../responsive";
 import Product from "./product";
+import _ from "lodash";
 
 const Container = styled.div``;
 
@@ -23,7 +24,7 @@ const Title = styled.h1`
   ${mobile({ fontSize: "20px", margin: "25px" })}
 `;
 
-const CategoryProducts = ({ category }) => {
+const CategoryProducts = ({ category, sortValue  }) => {
   const { curCate } = useSelector((state) => state.products);
   const dispatch = useDispatch();
 
@@ -39,18 +40,36 @@ const CategoryProducts = ({ category }) => {
       }
     }
     fetchCat(category);
-  }, [category]);
+  }, [category,sortValue]);
+  
+    const sorted = _.orderBy(curCate, ['price'], sortValue);
+  
+  if (sortValue !== "newest"){
 
-  return (
-    <Container>
-      <Title>{`${category} products`}</Title>
-      <Wrapper>
-        {curCate.map((item) => (
-          <Product item={item} key={item.id} />
-        ))}
-      </Wrapper>
-    </Container>
-  );
+    return (
+      <Container>
+        <Title>{`${category} products`}</Title>
+        <Wrapper>
+          { sorted.map((item) => (
+              <Product item={item} key={item.id} />
+            ))
+          }
+        </Wrapper>
+      </Container>
+    );
+  }else{
+    return (
+      <Container>
+        <Title>{`${category} products`}</Title>
+        <Wrapper>
+          { curCate.map((item) => (
+              <Product item={item} key={item.id} />
+            ))
+          }
+        </Wrapper>
+      </Container>
+    );
+  }
 };
 
 export default CategoryProducts;
