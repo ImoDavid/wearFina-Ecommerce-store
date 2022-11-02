@@ -114,7 +114,7 @@ const Login = () => {
            value={pwd}
            required />
         
-            <Button>Log in</Button>
+            <Button onClick={()=> handleSubmit()}>Log in</Button>
           
           <Anchor>FORGOT PASSWORD?</Anchor>
           <Link className="navLink" to="/register">
