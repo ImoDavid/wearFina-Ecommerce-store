@@ -1,6 +1,10 @@
 import styled from "styled-components";
+import { useDispatch} from "react-redux";
+import { login } from "../features/authUser/authuserSlice";
+import {useState} from "react";
 import { Link } from "react-router-dom";
 import { mobile } from "../responsive";
+import axios from "axios";
 
 const Container = styled.div`
   width: 100vw;
@@ -51,19 +55,70 @@ const Anchor = styled.a`
   text-decoration: underline;
 `;
 const Login = () => {
+  const url = 'https://fakestoreapi.com/auth/login';
+  const config = {
+    headers: {
+       "Access-Control-Allow-Origin": "/",
+      // "Access-Control-Allow-Methods": "GET,PUT,POST,DELETE,PATCH,OPTIONS",
+      // 'Content-Type': 'application/json',
+      // 'Accept': 'application/json',
+    
+      // 'Access-Control-Allow-Origin': 'http://localhost:3000',
+      // 'Access-Control-Allow-Credentials': 'true'
+    
+    }
+  };
+  const dispatch= useDispatch();
+  const [user, setUser] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [errMsg, setErrMsg] = useState('');
+  const [success, setSuccess] = useState(false);
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    console.log(user,pwd)
+   //dispatch(login({user,pwd}))
+    try{
+      const res = await axios.post(url,JSON.stringify({email:user,password:pwd}),config)
+      // {
+      //   headers:{'Access-Control-Allow-Origin': 'http://localhost:3000',
+      //   'Access-Control-Allow-Credentials': 'true'
+      // },
+      //   //  headers:{'content-Type': 'application/json'},
+      //   //  withCredentials:false
+      // }
+      setUser('');
+      setPwd('');
+      alert(JSON.stringify(res?.data));
+    }catch(err){
+      alert(err)
+    }
+  }
+
   return (
     <Container>
       <Wrapper>
         <Title>SIGN IN</Title>
-        <Form>
-          <Input placeholder="username" />
-          <Input placeholder="password" />
-          <Link className="navLink" to="/home">
+        <Form onSubmit={handleSubmit}>
+          <Input 
+          placeholder="username"
+          type="text"
+          onChange={(e) => setUser(e.target.value)}
+          value={user}
+          required
+           />
+          <Input placeholder="password"
+           type="password"
+           id="password"
+           onChange={(e) => setPwd(e.target.value)}
+           value={pwd}
+           required />
+        
             <Button>Log in</Button>
-          </Link>
+          
           <Anchor>FORGOT PASSWORD?</Anchor>
           <Link className="navLink" to="/register">
-            <Anchor>SIGN UP</Anchor>
+            <Button>SIGN UP</Button>
           </Link>
         </Form>
       </Wrapper>
