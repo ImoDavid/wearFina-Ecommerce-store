@@ -11,6 +11,7 @@ import Login from "./pages/login";
 import Register from "./pages/register";
 import Cart from "./pages/cart";
 import Error from './pages/error';
+import PrivateRoutes from './utils/privateRoutes'; 
 import './App.css';
 
 
@@ -34,14 +35,15 @@ const App = () => {
   <React.Fragment>
       <Routes>
       
-      
+      <Route element={<PrivateRoutes/>}>
       <Route path='/cart'  element={<Cart/>}/>
-      <Route path='/home' element={<Home/>}/>
-      <Route path='/login'  element={<Login/>}/>
       <Route path='/:category' element={<ProductList/>}/>
       <Route path='/product/:id' element={<SingleProduct/>}/>
+        </Route>       
+      <Route path="/" element={<Navigate to="/home"/>}/>  
+      <Route path='/home' element={<Home/>}/>
+      <Route path='/login'  element={<Login/>}/>
       <Route path='/register' element={<Register/>}/>
-      <Route path="/" element={<Navigate to="/home"/>}/>
       <Route path='*' element={<Error/>}/>
       </Routes>
     </React.Fragment>  
